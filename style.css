@@ -1,0 +1,73 @@
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.invitation {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.invitation:hover {
+    transform: scale(1.05);
+}
+
+.header {
+    background: linear-gradient(135deg, #FF416C 0%, #FF4B2B 100%);
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+    color: white;
+}
+
+.one {
+    color: #FFEB3B;
+}
+
+.soccer-ball {
+    font-size: 1.2em;
+    vertical-align: middle;
+}
+
+.content img {
+    width: 100%;
+    margin: 15px 0;
+    border-radius: 10px;
+}
+
+.form-group {
+    margin: 10px 0;
+}
+
+input[type="text"], 
+input[type="email"] {
+    padding: 10px;
+    width: calc(100% - 22px);
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background: #FF416C;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #FF4B2B;
+}
