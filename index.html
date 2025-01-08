@@ -9,33 +9,32 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-image: url('https://muralsyourway.vtexassets.com/arquivos/ids/240837-825-auto?width=825&height=auto&aspect=true'); /* Soccer field background */
+            background-image: url('https://muralsyourway.vtexassets.com/arquivos/ids/240837-825-auto?width=825&height=auto&aspect=true');
             background-size: cover;
             background-position: center;
             color: white;
         }
-
+        
         header {
             text-align: center;
-            color: #FFFFFF; /* White text */
+            color: #FFFFFF;
             padding: 50px 20px;
-            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+            background-color: rgba(0, 0, 0, 0.6);
             border-radius: 10px;
             margin-top: 50px;
             position: relative;
         }
-
+        
         header h1 {
             font-size: 3.5em;
             margin: 0;
         }
-
+        
         header p {
             font-size: 1.5em;
             margin-top: 10px;
         }
-
-        /* Soccer ball in the top right corner */
+        
         .soccer-ball-header {
             width: 20%;
             position: absolute;
@@ -43,8 +42,7 @@
             right: 10px;
             animation: ball-bounce 1s infinite ease-in-out;
         }
-
-        /* Bounce animation for the soccer ball */
+        
         @keyframes ball-bounce {
             0%, 100% {
                 transform: translateY(0);
@@ -53,7 +51,7 @@
                 transform: translateY(-15px);
             }
         }
-
+        
         section {
             padding: 40px 20px;
             text-align: center;
@@ -62,10 +60,9 @@
             max-width: 900px;
             margin: 0 auto;
         }
-
-        /* Invitation Card Style */
+        
         .invitation-card {
-            background-color: rgba(0, 0, 0, 0.7); /* Darker background for invitation */
+            background-color: rgba(0, 0, 0, 0.7);
             color: #ffffff;
             border-radius: 10px;
             padding: 40px;
@@ -73,22 +70,21 @@
             text-align: center;
             margin-bottom: 30px;
         }
-
+        
         .invitation-card h2 {
             font-size: 2.5em;
             margin-bottom: 20px;
             color: #fff;
         }
-
+        
         .invitation-card p {
             font-size: 1.3em;
             line-height: 1.6;
             color: #fff;
         }
-
-        /* RSVP Form Style */
+        
         .rsvp-form {
-            background-color: rgba(0, 0, 0, 0.7); /* Same background as the invitation card */
+            background-color: rgba(0, 0, 0, 0.7);
             padding: 25px;
             border-radius: 8px;
             margin-top: 30px;
@@ -98,13 +94,13 @@
             margin: 0 auto;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         }
-
+        
         .rsvp-form h3 {
             font-size: 2em;
             margin-bottom: 20px;
-            color: #2e8b57; /* Green text */
+            color: #2e8b57;
         }
-
+        
         .rsvp-form input, .rsvp-form textarea, .rsvp-form select {
             width: 100%;
             padding: 12px;
@@ -113,14 +109,14 @@
             border: 1px solid #2e8b57;
             font-size: 1.1em;
             color: #333;
-            box-sizing: border-box; /* Ensures padding and border are included in width */
+            box-sizing: border-box;
         }
-
+        
         .rsvp-form textarea {
-            min-height: 120px; /* Ensure text area height is uniform */
-            resize: vertical; /* Allow resizing vertically */
+            min-height: 120px;
+            resize: vertical;
         }
-
+        
         .rsvp-form input[type="submit"] {
             background-color: #2e8b57;
             color: white;
@@ -131,57 +127,56 @@
             width: 100%;
             transition: background-color 0.3s ease;
         }
-
+        
         .rsvp-form input[type="submit"]:hover {
-            background-color: #2e8b57;
+            background-color: #276c49;
         }
-
+        
         .rsvp-form input[type="submit"]:focus {
             outline: none;
         }
-
     </style>
 </head>
 <body>
 
 <header>
     <h1>Soccer Birthday Bash!</h1>
-    <p>Come enjoy a thrilling soccer game and celebration!</p>
-    <!-- Soccer ball in top right corner -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Soccer_ball.svg" alt="Soccer Ball" class="soccer-ball-header">
 </header>
 
 <section>
     <div class="invitation-card">
         <h2>You're Invited!</h2>
-        <p>Get ready to kick off a fun-filled soccer celebration for [Child's Name]’s birthday! We'll have games, food, and plenty of soccer excitement!</p>
-        <p><strong>Date:</strong> [Insert Date]<br><strong>Time:</strong> [Insert Time]<br><strong>Location:</strong> [Insert Location]</p>
-        <p>Join us for a day full of fun and a goal-scoring good time!</p>
+        <p>Let's kick up some fun to celebrate Elias Ayomide’s 1st birthday! We'll have games, food, and plenty of excitement!</p>
+        <p><strong>Date:</strong> January 25th, 2025<br><strong>Time:</strong> 4:00 PM<br><strong>Location:</strong> 200 Tanger Outlet Blvd Suite 790, Pooler, Georgia 31322</p>
+        <p>Join us for an afternoon full of fun and a goal-scoring good time!</p>
+        <p>Please RSVP Now to the parents with total guests attending</p>
     </div>
 
     <div class="rsvp-form">
         <h3>RSVP Now!</h3>
-        <form action="https://8ti4p9uzj0.execute-api.us-east-1.amazonaws.com/dev" method="post">
+        <form action="https://3ovvakh100.execute-api.us-east-1.amazonaws.com/production" method="post">
             <label for="name">Your Name:</label>
             <input type="text" id="name" name="name" required>
-
+        
             <label for="email">Your Email:</label>
             <input type="email" id="email" name="email" required>
-
+        
             <label for="attendance">Will you be attending?</label>
             <select id="attendance" name="attendance" required>
                 <option value="Yes">Yes, I'll be there!</option>
                 <option value="No">Sorry, I can't make it</option>
             </select>
-
+            <label for="guests">guests count:</label>
+            <input type="guests" number="guests" required>
+            
             <label for="message">Any special notes or food preferences?</label>
             <textarea id="message" name="message"></textarea>
-
+        
             <input type="submit" value="Send RSVP">
         </form>
     </div>
 </section>
 
-
 </body>
-</html>
+</html>        

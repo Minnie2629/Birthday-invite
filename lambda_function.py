@@ -1,87 +1,55 @@
 import json
 import boto3
-import uuid
-from botocore.exceptions import ClientError
-from datetime import datetime
-import logging
-
-# Initialize DynamoDB client
-dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('RSVPs')  # Your DynamoDB table name
-
-# Set up logging
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
+import uuid  # For generating unique IDs
 
 def lambda_handler(event, context):
     try:
-        # Log the incoming event for debugging
-        logger.info(f"Received event: {json.dumps(event)}")  # Log the incoming event
-
-        # Parse the incoming JSON body
-        body = json.loads(event['body'])
+        # Parse the request body
+        body = json.loads(event['body'])  # Extract 'body' from event
         
-        # Extract data from the form submission
-        name = body.get('name')
-        email = body.get('email')
-        attendance = body.get('attendance')
-        message = body.get('message', 'No message provided')  # Default if no message is provided
+        # Extract data from body
+        name = body.get("name")
+        email = body.get("email")
+        attendance = body.get("attendance")
+        guests = body.get("guests")
+        message = body.get("message")
 
-        logger.info(f"Parsed data - Name: {name}, Email: {email}, Attendance: {attendance}, Message: {message}")
-
-        # Validation: Ensure that essential fields are present
+        # Check required fields
         if not name or not email or not attendance:
-            logger.error("Missing essential fields in the request body")
             return {
-                'statusCode': 400,
-                'body': json.dumps({'message': 'Missing required fields (name, email, or attendance).'}),
-                'headers': {'Content-Type': 'application/json'}
+                "statusCode": 400,
+                "body": json.dumps({"error": "Missing required fields"})
             }
 
-        # Generate a unique ID for the RSVP entry (optional, if you want to store it as a secondary key or metadata)
-        rsvp_id = str(uuid.uuid4())
+        # Connect to DynamoDB
+        dynamodb = boto3.resource("dynamodb")
+        table = dynamodb.Table("RSVPTable")
 
-        # Create a timestamp for when the RSVP was submitted
-        timestamp = datetime.utcnow().isoformat()
+        # Generate a unique ID for the item
+        item_id = str(uuid.uuid4())
 
-        # Log data to be inserted into DynamoDB
-        logger.info(f"Inserting data into DynamoDB: {name}, {email}, {attendance}, {message}, Timestamp: {timestamp}")
-
-        # Insert data into DynamoDB, using email as the partition key
-        response = table.put_item(
+        # Save data to DynamoDB
+        table.put_item(
             Item={
-                'email': email,  # Using email as the partition key
-                'name': name,
-                'attendance': attendance,
-                'message': message,
-                'timestamp': timestamp
-            },
-            ConditionExpression="attribute_not_exists(email)"  # Ensures that the email doesn't already exist
+                "id": item_id,  # Primary key
+                "email": email,
+                "name": name,
+                "attendance": attendance,
+                "guests": guests,
+                "message": message,
+            }
         )
 
-        logger.info(f"Successfully inserted item into DynamoDB. Response: {response}")
-
-        # Return a success response
+        # Return success response
         return {
-            'statusCode': 200,
-            'body': json.dumps({'message': 'RSVP successfully submitted!'}),
-            'headers': {'Content-Type': 'application/json'}
-        }
-    
-    except ClientError as e:
-        # Log DynamoDB errors and return a failure response
-        logger.error(f"DynamoDB ClientError: {str(e)}")
-        return {
-            'statusCode': 500,
-            'body': json.dumps({'message': 'Error occurred while processing your RSVP. Please try again later.'}),
-            'headers': {'Content-Type': 'application/json'}
+            "statusCode": 200,
+            "body": json.dumps({"message": "RSVP received!"})
         }
     
     except Exception as e:
-        # Log any unexpected errors
-        logger.error(f"Unexpected error: {str(e)}")
+        # Log and return error
+        print(f"Error: {e}")
         return {
-            'statusCode': 500,
-            'body': json.dumps({'message': 'An unexpected error occurred. Please try again later.'}),
-            'headers': {'Content-Type': 'application/json'}
+            "statusCode": 500,
+            "body": json.dumps({"error": str(e)})
         }
